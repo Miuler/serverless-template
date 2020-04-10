@@ -4,6 +4,7 @@
   "description": "Serverless webpack example using Typescript",
   "main": "handler.js",
   "scripts": {
+    "local": "node --max-old-space-size=6192 ./node_modules/serverless/bin/serverless offline",
     "test": "NODE_ENV=test ./node_modules/.bin/jest --ci --verbose",
     "lint": "./node_modules/.bin/eslint . --ext .js,.jsx,.ts,.tsx",
     "buildtest": "./node_modules/.bin/tsc --noEmit",
