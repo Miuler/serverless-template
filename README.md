@@ -1,6 +1,6 @@
 # Serverless super templates
 
-![](https://github.com/MAN-CAR/serverless-template/workflows/master.yml/badge.svg)
+![](https://github.com/MAN-CAR/serverless-template/workflows/.github/workflows/master.yml/badge.svg)
 
 ## For code check:
 
