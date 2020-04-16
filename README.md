@@ -1,5 +1,7 @@
 # Serverless super templates
 
+![](https://github.com/MAN-CAR/serverless-template/workflows/master.yml/badge.svg)
+
 ## For code check:
 
 > npm run lint
