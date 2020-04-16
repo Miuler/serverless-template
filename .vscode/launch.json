@@ -1,0 +1,50 @@
+{
+  "configurations": [{
+      "name": "Lambda",
+      "type": "node",
+      "request": "launch",
+      "runtimeArgs": ["--inspect", "--debug-port=9229"],
+      "program": "${workspaceFolder}/node_modules/serverless/bin/serverless",
+      "args": ["offline"],
+      "port": 9229,
+      "console": "integratedTerminal"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug Hello Function",
+      "program": "${workspaceFolder}/node_modules/serverless/bin/serverless",
+      "args": ["invoke", "local", "-f", "hello", "--data", "{}"],
+      "outFiles": ["${workspaceRoot}/**/*.js"],
+      "preLaunchTask": "tsc: build - tsconfig.json",
+
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch Serverless Offline",
+      "program": "${workspaceRoot}/node_modules/serverless/bin/serverless",
+      "args": [
+        "offline",
+        "--noTimeout",
+        "--dontPrintOutput",
+        "--stage=local",
+        "-P",
+        "4000",
+        "--aws-profile=#PROFILENAME#"
+      ],
+      "sourceMaps": true,
+      "runtimeArgs": ["--lazy"],
+      "outFiles": ["${workspaceFolder}/.webpack/**/*.js"],
+      "protocol": "inspector",
+      "runtimeExecutable": "node",
+      "env": {
+        // Here we set some environment vars that should be set locally.
+        // They can and will overwrite the ones coming from your serverless.yml
+      },
+      "windows": {
+        "program": "${workspaceRoot}\\node_modules\\serverless\\bin\\serverless"
+      }
+    }
+  ]
+}

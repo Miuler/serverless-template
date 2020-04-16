@@ -17,8 +17,8 @@ custom:
     number: 3
 
 plugins:
-  - serverless-offline
   - serverless-webpack
+  - serverless-offline
   - serverless-iam-roles-per-function
   - serverless-create-global-dynamodb-table
   - serverless-prune-plugin
@@ -42,7 +42,7 @@ provider:
       Action:
         - xray:PutTraceSegments
         - xray:PutTelemetryRecords
-      Resource: "*"
+      Resource: '*'
 
 functions:
   hello:
@@ -50,4 +50,4 @@ functions:
     events:
       - http:
           method: get
-          path: hello 
+          path: hello

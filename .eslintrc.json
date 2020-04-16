@@ -38,7 +38,7 @@
         "map": [
           ["@src", "./src"],
           ["@tests", "./tests"],
-          ["@lib", "./lib"]
+          ["@lib", "./libs"]
         ],
         "extensions": [
           ".ts",

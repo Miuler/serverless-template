@@ -4,6 +4,7 @@
   "description": "Serverless webpack example using Typescript",
   "main": "handler.js",
   "scripts": {
+    "start": "serverless offline -s dev",
     "local": "node --max-old-space-size=6192 ./node_modules/serverless/bin/serverless offline",
     "test": "NODE_ENV=test ./node_modules/.bin/jest --ci --verbose",
     "lint": "./node_modules/.bin/eslint . --ext .js,.jsx,.ts,.tsx",
@@ -35,7 +36,7 @@
     "@babel/preset-typescript": "^7.9.0",
     "@types/aws-lambda": "^8.10.17",
     "@types/jest": "^25.2.1",
-    "@types/node": "^10.12.18",
+    "@types/node": "^10.17.19",
     "@typescript-eslint/eslint-plugin": "^2.27.0",
     "@typescript-eslint/parser": "^2.27.0",
     "babel-jest": "^25.3.0",
