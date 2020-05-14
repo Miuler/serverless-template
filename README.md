@@ -19,4 +19,11 @@
 > npm run deploy:${environment}
 
 
+# IDE Configuration
+
+## Intellij
+
+```
+Languages & Frameworks > JavaScript > Code Quality Tools > ESLint (Automatic ESLint configuration)
+```
 
