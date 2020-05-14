@@ -7,29 +7,27 @@ import * as logger from '../core/logger';
 import * as http from '../core/http';
 
 /**
- * Example of the call to BUS
+ * Ejemplo de llamada a un servicio rest
  * @param event
- * @param _context
+ * @param context
  */
-export const getUserLogin: APIGatewayProxyHandler = async (event, _context) => {
+export const getUserLogin: APIGatewayProxyHandler = async (event, context) => {
   const log = logger.getLogger('getUserLogin');
-  log.debug('event', event);
+  log.trace(event, 'event');
+  log.trace(context, 'context');
 
   const url = 'https://api.github.com/users/github';
   const userLogin = await http.get<User>(url)
     .then((userResponse) => {
-      log.info('userResponse.data.id:', userResponse.data.id);
-      log.info('userResponse.data.login:', userResponse.data.login);
-      log.warn('test userResponse.data.login:', userResponse.data.login);
-      log.error('error test userResponse.data.login:', userResponse.data.login);
+      log.debug('userResponse.headers: %s', userResponse.headers);
       return userResponse.data;
     }).then((user) => {
-      log.info('user: {}', user);
-      log.warn('warn user: {}', user);
+      log.trace(user, 'user');
+      log.info('user.id: %s', user.id);
       return user.login;
     });
 
-  log.info('userLogin: ', userLogin);
+  log.info('userLogin: %s', userLogin);
 
   return {
     statusCode: 200,
