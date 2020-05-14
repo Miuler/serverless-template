@@ -11,11 +11,27 @@ import * as http from '../core/http';
  * @param event
  * @param context
  */
-export const getUserLogin: APIGatewayProxyHandler = async (event, context) => {
-  const log = logger.getLogger('getUserLogin');
+export const getUserInfoHandler: APIGatewayProxyHandler = async (event, context) => {
+  const log = logger.getLogger('getUserInfoHandler');
   log.trace(event, 'event');
   log.trace(context, 'context');
 
+  const userLogin = await getUserInfo();
+
+  return {
+    statusCode: 200,
+    body: JSON.stringify({
+      userLogin,
+      message: echo('Module aliasing is really the more best'),
+    }, null, 2),
+  };
+};
+
+/**
+ * Mantenr la logica de negocio separado
+ */
+async function getUserInfo(): Promise<string> {
+  const log = logger.getLogger('getUserInfo');
   const url = 'https://api.github.com/users/github';
   const userLogin = await http.get<User>(url)
     .then((userResponse) => {
@@ -28,12 +44,5 @@ export const getUserLogin: APIGatewayProxyHandler = async (event, context) => {
     });
 
   log.info('userLogin: %s', userLogin);
-
-  return {
-    statusCode: 200,
-    body: JSON.stringify({
-      userLogin,
-      message: echo('Module aliasing is really the more best'),
-    }, null, 2),
-  };
-};
+  return userLogin;
+}
