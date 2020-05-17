@@ -46,7 +46,7 @@ provider:
 
 functions:
   githubnifo:
-    handler: src/handlers/getUserInfoHandler.getUserInfoHandler
+    handler: src/handlers/getUserInfo.handler
     events:
       - http:
           method: get

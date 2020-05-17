@@ -16,6 +16,8 @@
     "rules": {
       "import/no-unresolved": [2, {"commonjs": true, "amd": true}],
       "import/prefer-default-export": "off",
+      "no-use-before-define": "off",
+      "@typescript-eslint/no-use-before-define": ["error", { "classes": false , "functions":  false}],
       "max-len": ["error", {
         "code":  150,
         "ignoreComments":  true,
@@ -34,7 +36,7 @@
           "map": [
             ["@src", "./src"],
             ["@tests", "./tests"],
-            ["@lib", "./lib"]
+            ["@core", "./core"]
           ],
           "extensions": [
             ".ts",

@@ -1,17 +1,14 @@
 import { APIGatewayProxyHandler } from 'aws-lambda';
 import 'source-map-support/register';
-import { echo } from '@lib/exampleQuery';
-// eslint-disable-next-line import/extensions
-import * as logger from '../core/logger';
-// eslint-disable-next-line import/extensions
-import * as http from '../core/http';
+import * as logger from '@core/logger';
+import * as http from '@core/http';
 
 /**
  * Ejemplo de llamada a un servicio rest
  * @param event
  * @param context
  */
-export const getUserInfoHandler: APIGatewayProxyHandler = async (event, context) => {
+export const handler: APIGatewayProxyHandler = async (event, context) => {
   const log = logger.getLogger('getUserInfoHandler');
   log.trace(event, 'event');
   log.trace(context, 'context');
@@ -22,7 +19,6 @@ export const getUserInfoHandler: APIGatewayProxyHandler = async (event, context)
     statusCode: 200,
     body: JSON.stringify({
       userLogin,
-      message: echo('Module aliasing is really the more best'),
     }, null, 2),
   };
 };
@@ -30,7 +26,7 @@ export const getUserInfoHandler: APIGatewayProxyHandler = async (event, context)
 /**
  * Mantenr la logica de negocio separado
  */
-async function getUserInfo(): Promise<string> {
+export async function getUserInfo(): Promise<string> {
   const log = logger.getLogger('getUserInfo');
   const url = 'https://api.github.com/users/github';
   const userLogin = await http.get<User>(url)
