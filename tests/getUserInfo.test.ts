@@ -1,8 +1,9 @@
-import { getUserInfo } from '../src/handlers/getUserInfo';
+import { getUserInfo } from '@src/handlers/getUserInfo';
 
 describe('get github user', () => {
-  it('should ok', () => {
+  it('should ok', async () => {
     expect.hasAssertions();
-    expect(getUserInfo()).toBe('');
+    const response = await getUserInfo();
+    expect(response).toBe('github');
   });
 });
