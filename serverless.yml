@@ -28,7 +28,7 @@ provider:
   runtime: nodejs12.x
   frameworkVersion: ‘1.70.1’
   stage: ${opt:stage, 'local'}
-  region: ${opt:region, 'us-east-2'}
+  region: ${opt:region, 'us-east-1'}
   apiGateway:
     minimumCompressionSize: 1024
   environment:
@@ -46,8 +46,14 @@ provider:
 
 functions:
   githubnifo:
-    handler: src/handlers/getUserInfo.handler
+    handler: src/handlers/getUserGithub.handler
     events:
       - http:
           method: get
           path: github
+  anyUser:
+    handler: src/handlers/getUserX.handler
+    events:
+      - http:
+          method: get
+          path: github/{user}

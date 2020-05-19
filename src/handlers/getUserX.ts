@@ -10,14 +10,17 @@ import * as http from '@core/http';
  */
 export const handler: APIGatewayProxyHandler = async (event, context) => {
   const log = logger.getLogger('getUserInfoHandler');
+  const country = event.headers['CloudFront-Viewer-Country'];
   log.trace(event, 'event');
   log.trace(context, 'context');
+  const { user } = event.pathParameters;
 
-  const userLogin = await getUserInfo();
+  const userLogin = await getUserX(user);
 
   return {
     statusCode: 200,
     body: JSON.stringify({
+      requestOrigin: country,
       userLogin,
     }, null, 2),
   };
@@ -26,17 +29,17 @@ export const handler: APIGatewayProxyHandler = async (event, context) => {
 /**
  * Mantenr la logica de negocio separado
  */
-export async function getUserInfo(): Promise<string> {
-  const log = logger.getLogger('getUserInfo');
-  const url = 'https://api.github.com/users/github';
+export async function getUserX(user: string): Promise<string> {
+  const log = logger.getLogger('getUserX'.concat(user));
+  const url = 'https://api.github.com/users/'.concat(user);
   const userLogin = await http.get<User>(url)
     .then((userResponse) => {
       log.debug('userResponse.headers: %s', userResponse.headers);
       return userResponse.data;
-    }).then((user) => {
-      log.trace(user, 'user');
-      log.info('user.id: %s', user.id);
-      return user.login;
+    }).then((_user) => {
+      log.trace(_user, 'user');
+      log.info('user.id: %s', _user.id);
+      return _user.login;
     });
 
   log.info('userLogin: %s', userLogin);
